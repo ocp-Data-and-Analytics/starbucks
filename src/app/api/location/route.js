@@ -23,7 +23,7 @@ export async function POST(request) {
 
   const connection = snowflake.createConnection(envVariables);
 
-  console.log("Created Snowflake connection");
+  console.log("Created Snowflake connection.");
 
   return new Promise((resolve) => {
     connection.connect((err, conn) => {
