@@ -1,0 +1,32 @@
+{
+  "sqltools.connections": [
+    {
+      "authenticator": "SNOWFLAKE",
+      "ocspOptions": {
+        "ocspFailOpen": true
+      },
+      "snowflakeOptions": {
+        "clientSessionKeepAlive": true,
+        "clientSessionKeepAliveHeartbeatFrequency": 3600
+      },
+      "previewLimit": 50,
+      "driver": "Snowflake",
+      "name": "Snowflake",
+      "account": "BWB78779.us-east-1",
+      "username": "sblodgett",
+      "password": "Password123!@#",
+      "database": "STARBUCKS",
+      "warehouse": "COMPUTE_WH"
+    },
+    {
+      "previewLimit": 50,
+      "server": "ocpcodes.postgres.database.azure.com",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "ocpcodes",
+      "database": "cancercodes",
+      "username": "scooter",
+      "password": "OCPTest246!"
+    }
+  ]
+}
