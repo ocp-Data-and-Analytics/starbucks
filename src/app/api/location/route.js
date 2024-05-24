@@ -28,7 +28,7 @@ export async function POST(request) {
   return new Promise((resolve) => {
     connection.connect((err, conn) => {
       if (err) {
-        console.error("Error connecting to Snowflake:", err.message);
+        console.log("Error connecting to Snowflake:", err.message);
         resolve(
           new NextResponse(JSON.stringify({ error: err.message }), {
             status: 500,
