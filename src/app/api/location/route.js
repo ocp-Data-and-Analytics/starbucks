@@ -16,14 +16,14 @@ export async function POST(request) {
     warehouse: process.env.NEXT_PUBLIC_SNOWFLAKE_WAREHOUSE,
   };
 
-  for (const [key, value] of Object.entries(envVariables)) {
-    const debugMessage = `${key}: ${value ? value.substring(0, 3) : "undefined"}`;
-    console.log(debugMessage);
-  }
+  // for (const [key, value] of Object.entries(envVariables)) {
+  //   const debugMessage = `${key}: ${value ? value.substring(0, 3) : "undefined"}`;
+  //   console.log(debugMessage);
+  // }
 
   const connection = snowflake.createConnection(envVariables);
 
-  console.log("Created Snowflake connection.");
+  // console.log("Created Snowflake connection.");
 
   return new Promise((resolve) => {
     connection.connect((err, conn) => {
@@ -38,7 +38,7 @@ export async function POST(request) {
         return;
       }
 
-      console.log("Connected to Snowflake");
+      // console.log("Connected to Snowflake");
 
       const query = `
         SELECT LOCATION_NAME as NAME, street_address as STREET, city as CITY, region as REGION, Phone_number as PHONE, latitude, longitude
@@ -49,7 +49,7 @@ export async function POST(request) {
         ) <= ${radius} * 1609.34;
       `;
 
-      console.log("Executing query:", query);
+      // console.log("Executing query:", query);
 
       connection.execute({
         sqlText: query,
@@ -67,7 +67,7 @@ export async function POST(request) {
             return;
           }
 
-          console.log("Query executed successfully, number of rows:", rows.length);
+          // console.log("Query executed successfully, number of rows:", rows.length);
 
           const locations = rows.map((row) => ({
             name: row.NAME,
