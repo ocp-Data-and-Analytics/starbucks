@@ -2,7 +2,10 @@ import { NextResponse } from "next/server";
 import snowflake from "snowflake-sdk";
 
 export async function POST(request) {
+  console.log("Received POST request");
+
   const { latitude, longitude, radius } = await request.json();
+  console.log("Request data:", { latitude, longitude, radius });
 
   const connection = snowflake.createConnection({
     account: process.env.SNOWFLAKE_ACCOUNT,
@@ -11,6 +14,8 @@ export async function POST(request) {
     database: process.env.SNOWFLAKE_DATABASE,
     warehouse: process.env.SNOWFLAKE_WAREHOUSE,
   });
+
+  console.log("Created Snowflake connection");
 
   return new Promise((resolve) => {
     connection.connect((err, conn) => {
@@ -25,6 +30,8 @@ export async function POST(request) {
         return;
       }
 
+      console.log("Connected to Snowflake");
+
       const query = `
         SELECT LOCATION_NAME as NAME, street_address as STREET, city as CITY, region as REGION, Phone_number as PHONE, latitude, longitude
         FROM PUBLIC.CORE_POI
@@ -33,6 +40,8 @@ export async function POST(request) {
             TO_GEOGRAPHY(ST_POINT(${longitude}, ${latitude}))
         ) <= ${radius} * 1609.34;
       `;
+
+      console.log("Executing query:", query);
 
       connection.execute({
         sqlText: query,
@@ -50,6 +59,8 @@ export async function POST(request) {
             return;
           }
 
+          console.log("Query executed successfully, number of rows:", rows.length);
+
           const locations = rows.map((row) => ({
             name: row.NAME,
             street: row.STREET,
@@ -59,6 +70,8 @@ export async function POST(request) {
             latitude: row.LATITUDE,
             longitude: row.LONGITUDE,
           }));
+
+          // console.log("Locations data:", locations);
 
           resolve(
             new NextResponse(JSON.stringify(locations), {
