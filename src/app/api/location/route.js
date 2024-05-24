@@ -9,11 +9,11 @@ export async function POST(request) {
 
   // Debug: Print the first three characters of each environment variable
   const envVariables = {
-    account: process.env.SNOWFLAKE_ACCOUNT,
-    username: process.env.SNOWFLAKE_USERNAME,
-    password: process.env.SNOWFLAKE_PASSWORD,
-    database: process.env.SNOWFLAKE_DATABASE,
-    warehouse: process.env.SNOWFLAKE_WAREHOUSE,
+    account: process.env.NEXT_PUBLIC_SNOWFLAKE_ACCOUNT,
+    username: process.env.NEXT_PUBLIC_SNOWFLAKE_USERNAME,
+    password: process.env.NEXT_PUBLIC_SNOWFLAKE_PASSWORD,
+    database: process.env.NEXT_PUBLIC_SNOWFLAKE_DATABASE,
+    warehouse: process.env.NEXT_PUBLIC_SNOWFLAKE_WAREHOUSE,
   };
 
   for (const [key, value] of Object.entries(envVariables)) {
