@@ -7,13 +7,21 @@ export async function POST(request) {
   const { latitude, longitude, radius } = await request.json();
   console.log("Request data:", { latitude, longitude, radius });
 
-  const connection = snowflake.createConnection({
+  // Debug: Print the first three characters of each environment variable
+  const envVariables = {
     account: process.env.SNOWFLAKE_ACCOUNT,
     username: process.env.SNOWFLAKE_USERNAME,
     password: process.env.SNOWFLAKE_PASSWORD,
     database: process.env.SNOWFLAKE_DATABASE,
     warehouse: process.env.SNOWFLAKE_WAREHOUSE,
-  });
+  };
+
+  for (const [key, value] of Object.entries(envVariables)) {
+    const debugMessage = `${key}: ${value ? value.substring(0, 3) : "undefined"}`;
+    console.log(debugMessage);
+  }
+
+  const connection = snowflake.createConnection(envVariables);
 
   console.log("Created Snowflake connection");
 
