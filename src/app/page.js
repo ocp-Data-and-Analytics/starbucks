@@ -27,6 +27,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+    console.log('Google Maps API Key:', process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
     if (location && addressSelected) {
       axios
         .post("/api/location", {
