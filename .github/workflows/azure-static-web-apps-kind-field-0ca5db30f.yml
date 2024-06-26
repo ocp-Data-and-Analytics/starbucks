@@ -23,6 +23,12 @@ jobs:
         with:
           submodules: true
           lfs: false
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        env:
+          NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}
+        run: npm run build
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
