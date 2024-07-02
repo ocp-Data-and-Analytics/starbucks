@@ -23,8 +23,6 @@ jobs:
         with:
           submodules: true
           lfs: false
-      - name: Echo Maps Key Secret
-        run: echo "${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}"
       - name: Echo Maps Key Vars
         run: echo "${{ vars.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}"
       - name: Install Dependencies Scott-2
