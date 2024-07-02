@@ -30,7 +30,6 @@ jobs:
       - name: Install Dependencies Scott-2
         run: npm install
       - name: Build
-        run: npm run build
         env: # Add environment variables here
           NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ vars.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}}
           NEXT_PUBLIC_SNOWFLAKE_ACCOUNT: ${{ vars.NEXT_PUBLIC_SNOWFLAKE_ACCOUNT}}
@@ -38,7 +37,7 @@ jobs:
           NEXT_PUBLIC_SNOWFLAKE_PASSWORD: ${{ vars.NEXT_PUBLIC_SNOWFLAKE_PASSWORD}}
           NEXT_PUBLIC_SNOWFLAKE_USERNAME: ${{ vars.NEXT_PUBLIC_SNOWFLAKE_USERNAME}}
           NEXT_PUBLIC_SNOWFLAKE_WAREHOUSE: ${{ vars.NEXT_PUBLIC_SNOWFLAKE_WAREHOUSE}}    
-          
+        run: npm run build          
       - name: Build And Deploy Scott-3
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
