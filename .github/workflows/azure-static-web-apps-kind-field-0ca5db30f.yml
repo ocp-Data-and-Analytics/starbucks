@@ -15,38 +15,36 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-    - name: Set up Node.js version Scott-1 
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
-    - uses: actions/checkout@v3
-      with:
-        submodules: true
-        lfs: false
-    - name: Install Dependencies Scott-2
-      run: npm install
-
-    - name: Echo Maps Key Secret
-      run: echo "${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}"
-
-    - name: Echo Maps Key Var
-      run: echo "${{ vars.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}"
-      
-    - name: Build
-      run: npm run build
-      env:
-        NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}
-        NEXT_PUBLIC_SNOWFLAKE_ACCOUNT: ${{ secrets.NEXT_PUBLIC_SNOWFLAKE_ACCOUNT }}
-        NEXT_PUBLIC_SNOWFLAKE_DATABASE: ${{ secrets.NEXT_PUBLIC_SNOWFLAKE_DATABASE }}
-        NEXT_PUBLIC_SNOWFLAKE_PASSWORD: ${{ secrets.NEXT_PUBLIC_SNOWFLAKE_PASSWORD }}
-        NEXT_PUBLIC_SNOWFLAKE_USERNAME: ${{ secrets.NEXT_PUBLIC_SNOWFLAKE_USERNAME }}
-        NEXT_PUBLIC_SNOWFLAKE_WAREHOUSE: ${{ secrets.NEXT_PUBLIC_SNOWFLAKE_WAREHOUSE }}
+      - name: Set up Node.js version Scott-1
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          lfs: false
+      - name: Echo Maps Key Secret
+        run: echo "${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}"
+      - name: Echo Maps Key Vars
+        run: echo "${{ vars.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}"
+      - name: Install Dependencies Scott-2
+        run: npm install
+      - name: Build
+        run: npm run build
+        env: # Add environment variables here
+          echo "Maps key is: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}}"
+          NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}}
+          NEXT_PUBLIC_SNOWFLAKE_ACCOUNT: ${{ secrets.NEXT_PUBLIC_SNOWFLAKE_ACCOUNT}}
+          NEXT_PUBLIC_SNOWFLAKE_DATABASE: ${{ secrets.NEXT_PUBLIC_SNOWFLAKE_DATABASE}}
+          NEXT_PUBLIC_SNOWFLAKE_PASSWORD: ${{ secrets.NEXT_PUBLIC_SNOWFLAKE_PASSWORD}}
+          NEXT_PUBLIC_SNOWFLAKE_USERNAME: ${{ secrets.NEXT_PUBLIC_SNOWFLAKE_USERNAME}}
+          NEXT_PUBLIC_SNOWFLAKE_WAREHOUSE: ${{ secrets.NEXT_PUBLIC_SNOWFLAKE_WAREHOUSE}}    
           
       - name: Build And Deploy Scott-3
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          run echo "Azure API key is: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_KIND_FIELD_0CA5DB30F}}"
+          echo "Azure API key is: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_KIND_FIELD_0CA5DB30F}}"
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_KIND_FIELD_0CA5DB30F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
