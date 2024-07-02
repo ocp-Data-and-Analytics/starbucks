@@ -32,8 +32,8 @@ jobs:
       - name: Build
         run: npm run build
         env: # Add environment variables here
-          echo "Maps key is: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}}"
-          NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}}
+          echo "Maps key is: ${{ vars.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}}"
+          NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ vars.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}}
           NEXT_PUBLIC_SNOWFLAKE_ACCOUNT: ${{ secrets.NEXT_PUBLIC_SNOWFLAKE_ACCOUNT}}
           NEXT_PUBLIC_SNOWFLAKE_DATABASE: ${{ secrets.NEXT_PUBLIC_SNOWFLAKE_DATABASE}}
           NEXT_PUBLIC_SNOWFLAKE_PASSWORD: ${{ secrets.NEXT_PUBLIC_SNOWFLAKE_PASSWORD}}
