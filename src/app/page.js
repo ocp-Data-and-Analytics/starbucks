@@ -28,7 +28,8 @@ const Home = () => {
 
   useEffect(() => {
     console.log(`Current environment: ${process.env.NODE_ENV}`);
-    console.log('Google Maps API Key:', process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
+    console.log(`Google Maps API Key - updated:, ${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`);
+    console.log(`Current environment: ${process.env.NEXT_PUBLIC_SIMPLETEST}`);
     if (location && addressSelected) {
       axios
         .post("/api/location", {
