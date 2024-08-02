@@ -47,7 +47,7 @@ const Home = () => {
           setStores(response.data);
         })
         .catch((error) => {
-          console.error("Error fetching stores :", error);
+          console.error("Error fetching stores: ", error);
         });
     }
     fetchData();
